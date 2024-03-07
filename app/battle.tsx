@@ -9,7 +9,7 @@ import { TransactionBlock } from "@mysten/sui.js/transactions";
 import { Button, Flex, Heading, Text } from "@radix-ui/themes";
 import { useNetworkVariable } from "./networkConfig";
 
-export function Counter({ id }: { id: string }) {
+export function Battle({ id }: { id: string }) {
   const client = useSuiClient();
   const currentAccount = useCurrentAccount();
   const counterPackageId = useNetworkVariable("counterPackageId");

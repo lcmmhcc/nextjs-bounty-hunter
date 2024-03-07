@@ -2,14 +2,17 @@ import { ConnectButton, useCurrentAccount } from "@mysten/dapp-kit";
 import { isValidSuiObjectId } from "@mysten/sui.js/utils";
 import { Box, Container, Flex, Heading } from "@radix-ui/themes";
 import { useState } from "react";
-import { Counter } from "./battle";
+import { Battle } from "./battle";
 import { CreateBattle } from "./CreateBattle";
 
 function App() {
   const currentAccount = useCurrentAccount();
-  const [counterId, setCounter] = useState(() => {
-    const hash = window.location.hash.slice(1);
-    return isValidSuiObjectId(hash) ? hash : null;
+  const [battleID, setBattleID] = useState(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash.slice(1);
+      return isValidSuiObjectId(hash) ? hash : null;
+    }
+    return null;
   });
 
   return (
@@ -39,13 +42,13 @@ function App() {
           style={{ background: "var(--gray-a2)", minHeight: 500 }}
         >
           {currentAccount ? (
-            counterId ? (
-              <Counter id={counterId} />
+            battleID ? (
+              <Battle id={battleID} />
             ) : (
               <CreateBattle
                 onCreated={(id) => {
                   window.location.hash = id;
-                  setCounter(id);
+                  setBattleID(id);
                 }}
               />
             )
