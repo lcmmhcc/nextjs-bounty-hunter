@@ -87,7 +87,6 @@ export function Battle({ id }: { id: string }) {
         </a>
 
         <a
-          onClick={() => executeMoveCall("magic")}
           className={styles.card}
         >
           <h2>
