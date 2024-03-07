@@ -8,6 +8,7 @@ import type { SuiObjectData } from "@mysten/sui.js/client";
 import { TransactionBlock } from "@mysten/sui.js/transactions";
 import { Button, Flex, Heading, Text } from "@radix-ui/themes";
 import { useNetworkVariable } from "./networkConfig";
+import styles from "./page.module.css";
 
 export function Battle({ id }: { id: string }) {
   const client = useSuiClient();
@@ -66,19 +67,45 @@ export function Battle({ id }: { id: string }) {
   const player = getPlayer(data.data)?.value as { hp: number; atk: number };
   return (
     <>
-      <Heading size="3">battle {id}</Heading>
-      <Flex direction="column" gap="2">
+      <div className={styles.center}>
+        <Heading>battle {id}</Heading>
+      </div>
+      <div className={styles.center}>
         <Text>fugitive hp: {fugitive.hp} | atk : {fugitive.atk}</Text>
+      </div>
+      <div className={styles.center}>
         <Text>player hp: {player.hp} | atk : {player.atk}</Text>
-        <Flex direction="row" gap="2">
-          <Button onClick={() => executeMoveCall("attack")}>
-          attack
-          </Button>
-          {ownedByCurrentAccount ? (
-            <Button onClick={() => executeMoveCall("burn")}>Reset</Button>
-          ) : null}
-        </Flex>
-      </Flex>
+      </div>
+      <div className={styles.grid}>
+        <a
+          onClick={() => executeMoveCall("attack")}
+          className={styles.card}
+        >
+          <h2>
+          attack <span>-&gt;</span>
+          </h2>
+        </a>
+
+        <a
+          onClick={() => executeMoveCall("magic")}
+          className={styles.card}
+        >
+          <h2>
+          magic <span>-&gt;</span>
+          </h2>
+        </a>
+
+        <a
+          onClick={() => executeMoveCall("burn")}
+          className={styles.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2>
+            burn <span>-&gt;</span>
+          </h2>
+        </a>
+      </div>
     </>
   );
 }
