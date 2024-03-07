@@ -5,6 +5,7 @@ import {
   useSuiClient,
 } from "@mysten/dapp-kit";
 import { useNetworkVariable } from "./networkConfig";
+import styles from "./page.module.css";
 
 export function CreateBattle({
   onCreated,
@@ -18,12 +19,12 @@ export function CreateBattle({
   return (
     <Container>
       <Button
-        size="3"
         onClick={() => {
           create();
         }}
+        className={styles.card}
       >
-        Start Battle
+        Create Battle <span>-&gt;</span>
       </Button>
     </Container>
   );

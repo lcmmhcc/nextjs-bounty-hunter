@@ -10,24 +10,26 @@ import { Theme } from "@radix-ui/themes";
 import App from "./App.tsx";
 import { networkConfig } from "./networkConfig.ts";
 
+import Image from "next/image";
+import styles from "./page.module.css";
+
 const queryClient = new QueryClient();
 
 export default function Home() {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-         <div id="root">
-         <React.StrictMode>
-            <Theme appearance="dark">
-            <QueryClientProvider client={queryClient}>
-                <SuiClientProvider networks={networkConfig} defaultNetwork="devnet">
-                <WalletProvider autoConnect>
-                    <App />
-                </WalletProvider>
-                </SuiClientProvider>
-            </QueryClientProvider>
-            </Theme>
-        </React.StrictMode>
-         </div>
-      </main>
+      <main className={styles.main}>
+      <div className={styles.description}>
+        <React.StrictMode>
+              <QueryClientProvider client={queryClient}>
+                  <SuiClientProvider networks={networkConfig} defaultNetwork="devnet">
+                  <WalletProvider autoConnect>
+                      <App />
+                  </WalletProvider>
+                  </SuiClientProvider>
+              </QueryClientProvider>
+          </React.StrictMode>
+      </div>
+    </main>
+      
     );
   }
